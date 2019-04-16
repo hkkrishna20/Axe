@@ -1,1 +1,6 @@
 
+To set it up, let’s create a separate project and initialise an npm project using the npm init command. Feel free to leave default values for everything it asks for. To run Selenium, you’ll need to install selenium-webdriver. We’ll perform our tests in PhantomJS, so we’ll need to install that as well. Selenium requires Node version 6.9 or newer, so make sure you have it installed.
+
+To install the packages run:
+
+npm install phantomjs-prebuilt selenium-webdriver --save-dev
