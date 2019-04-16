@@ -4,3 +4,38 @@ To set it up, let’s create a separate project and initialise an npm project us
 To install the packages run:
 
 npm install phantomjs-prebuilt selenium-webdriver --save-dev
+
+To install the packages run:
+
+npm install phantomjs-prebuilt selenium-webdriver --save-dev
+
+Now we’ll need to install axe-core and axe-webdriverjs:
+
+npm install axe-core axe-webdriverjs --save-dev
+
+Now that the infrastructure is set up, let’s create a script that runs tests agains sitepoint.com (nothing personal, guys). Create a file axe.js in the project folder and add the following contents:
+
+const axeBuilder = require('axe-webdriverjs');
+const webDriver = require('selenium-webdriver');
+
+// create a PhantomJS WebDriver instance
+const driver = new webDriver.Builder()
+  .forBrowser('phantomjs')
+  .build();
+
+// run the tests and output the results in the console
+driver
+  .get('http://sitepoint.com')
+  .then(() => {
+    axeBuilder(driver)
+      .analyze((results) => {
+        console.log(results);
+      });
+  });
+
+To execute this test, we can run node axe.js. We can’t run it from the console since we’ve installed PhantomJS locally in our project. We have to run it as an npm script. To do that, open your package.json file and change the default test script entry:
+
+"scripts": {
+    "test": "node axe.js"
+},
+
